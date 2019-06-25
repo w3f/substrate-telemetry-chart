@@ -1,0 +1,21 @@
+{{- if ne .Values.environment "ci" }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: telemetry
+  namespace: default
+spec:
+  secretName: {{ include "substrate-telemetry.tlsSecretName" . }}
+  issuerRef:
+    name: letsencrypt
+  dnsNames:
+  - {{ include "substrate-telemetry.frontendDomain" . }}
+  - {{ include "substrate-telemetry.backendDomain" . }}
+  acme:
+    config:
+    - dns01:
+        provider: prod-dns
+      domains:
+        - {{ include "substrate-telemetry.frontendDomain" . }}
+        - {{ include "substrate-telemetry.backendDomain" . }}
+{{- end }}

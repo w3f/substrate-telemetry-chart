@@ -1,0 +1,31 @@
+{{- if ne .Values.environment "ci" }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: substrate-telemetry
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/limit-rps: "10"
+spec:
+  tls:
+  - hosts:
+      - {{ include "substrate-telemetry.frontendDomain" . }}
+      - {{ include "substrate-telemetry.backendDomain" . }}
+    secretName: {{ include "substrate-telemetry.tlsSecretName" . }}
+  rules:
+  - host: {{ include "substrate-telemetry.frontendDomain" . }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ include "substrate-telemetry.frontendSvcName" . }}
+          servicePort: {{ .Values.frontendPort }}
+  - host: {{ include "substrate-telemetry.backendDomain" . }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ include "substrate-telemetry.backendSvcName" . }}
+          servicePort: {{ .Values.backendPort }}
+
+{{- end }}

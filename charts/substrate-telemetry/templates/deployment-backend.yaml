@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "substrate-telemetry.backendAppName" . }}
+  labels:
+    app: {{ include "substrate-telemetry.backendAppName" . }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ include "substrate-telemetry.backendAppName" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "substrate-telemetry.backendAppName" . }}
+    spec:
+      containers:
+      - name: {{ include "substrate-telemetry.backendAppName" . }}
+        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        imagePullPolicy: IfNotPresent
+        command: ["yarn"]
+        args:
+        - start:backend
+        ports:
+        - name: backend
+          containerPort: {{ .Values.backendPort }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.backendPort }}
+          initialDelaySeconds: 3
+          timeoutSeconds: 3
+        {{ if ne .Values.environment "ci" }}
+        resources:
+          limits:
+            cpu: 100m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 500Mi
+        {{ end }}
