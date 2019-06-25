@@ -12,7 +12,7 @@ run_tests() {
 }
 
 teardown() {
-    helm delete --purge susbtrate-telemetry
+    helm delete --purge substrate-telemetry
 }
 
 main(){
