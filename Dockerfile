@@ -13,7 +13,8 @@ RUN export PYTHONPATH=${PYTHONPATH}:/usr/lib/python2.7
 
 RUN git clone https://github.com/paritytech/substrate-telemetry.git .
 
-RUN yarn
+RUN yarn && \
+  yarn build:all
 
 EXPOSE 1024
 EXPOSE 8080
