@@ -21,9 +21,9 @@ spec:
       - name: {{ include "substrate-telemetry.backendAppName" . }}
         image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
         imagePullPolicy: IfNotPresent
-        command: ["yarn"]
+        command: ["node"]
         args:
-        - start:backend
+        - packages/backend/build/index.js
         ports:
         - name: backend
           containerPort: {{ .Values.backendPort }}
