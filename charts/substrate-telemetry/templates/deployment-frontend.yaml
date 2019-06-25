@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ include "substrate-telemetry.frontendAppName" . }}
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 3
   strategy:
     type: RollingUpdate
@@ -39,8 +39,8 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 200Mi
+            memory: 800Mi
           requests:
             cpu: 100m
-            memory: 200Mi
+            memory: 800Mi
         {{ end }}
