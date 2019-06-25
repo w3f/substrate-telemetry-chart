@@ -7,7 +7,8 @@ source /scripts/bootstrap-helm.sh
 run_tests() {
     echo Running tests...
 
-    wait_pod_ready susbtrate-telemetry
+    wait_pod_ready susbtrate-telemetry-backend
+    wait_pod_ready susbtrate-telemetry-frontend
 }
 
 teardown() {
