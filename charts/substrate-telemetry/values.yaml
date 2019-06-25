@@ -1,3 +1,12 @@
 image:
   repo: web3f/substrate-telemetry
   tag: latest
+
+namespace: default
+
+environment: production
+
+domain: testnet.w3f.tech
+
+frontendPort: 3000
+backendPort: 1024
