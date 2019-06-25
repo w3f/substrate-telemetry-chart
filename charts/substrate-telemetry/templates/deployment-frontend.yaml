@@ -33,8 +33,8 @@ spec:
           httpGet:
             path: /
             port: {{ .Values.frontendPort }}
-          initialDelaySeconds: 3
-          timeoutSeconds: 3
+          initialDelaySeconds: 60
+          timeoutSeconds: 30
         {{ if ne .Values.environment "ci" }}
         resources:
           limits:
