@@ -28,8 +28,7 @@ spec:
         - name: backend
           containerPort: {{ .Values.backendPort }}
         readinessProbe:
-          httpGet:
-            path: /
+          tcpSocket:
             port: {{ .Values.backendPort }}
           initialDelaySeconds: 3
           timeoutSeconds: 3
