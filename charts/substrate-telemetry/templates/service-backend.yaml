@@ -9,5 +9,7 @@ spec:
   ports:
   - name: backend
     port: {{ .Values.backendPort }}
+  - name: feed
+    port: {{ .Values.feedPort }}
   selector:
     app: {{ include "substrate-telemetry.backendAppName" . }}

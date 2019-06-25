@@ -22,6 +22,10 @@ spec:
         backend:
           serviceName: {{ include "substrate-telemetry.frontendSvcName" . }}
           servicePort: {{ .Values.frontendPort }}
+      - path: /feed/
+        backend:
+          serviceName: {{ include "substrate-telemetry.backendSvcName" . }}
+          servicePort: {{ .Values.feedPort }}
   - host: {{ include "substrate-telemetry.backendDomain" . }}
     http:
       paths:

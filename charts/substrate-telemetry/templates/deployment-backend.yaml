@@ -28,6 +28,8 @@ spec:
         ports:
         - name: backend
           containerPort: {{ .Values.backendPort }}
+        - name: feed
+          containerPort: {{ .Values.feedPort }}
         readinessProbe:
           tcpSocket:
             port: {{ .Values.backendPort }}
