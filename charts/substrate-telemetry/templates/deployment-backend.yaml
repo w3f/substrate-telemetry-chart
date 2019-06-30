@@ -46,7 +46,7 @@ spec:
         {{ end }}
       {{- if .Values.exporter.enabled }}
       - name: {{ include "substrate-telemetry.exporterName" . }}
-        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        image: {{ .Values.exporter.image.repo }}:{{ .Values.exporter.image.tag }}
         imagePullPolicy: IfNotPresent
         ports:
         - name: metrics
