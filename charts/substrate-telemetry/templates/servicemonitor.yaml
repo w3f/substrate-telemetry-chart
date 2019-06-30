@@ -1,0 +1,14 @@
+{{ if and (ne .Values.environment "ci") (.Values.exporter.enabled) }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "substrate-telemetry.exporterName" . }}
+  labels:
+    release: prometheus-operator
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "substrate-telemetry.backendAppName" . }}
+  endpoints:
+  - port: metrics
+{{ end }}

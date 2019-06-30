@@ -44,3 +44,24 @@ spec:
             cpu: 100m
             memory: 500Mi
         {{ end }}
+      {{- if .Values.exporter.enabled }}
+      - name: {{ include "substrate-telemetry.exporterName" . }}
+        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: metrics
+          containerPort: {{ .Values.exporter.port }}
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: {{ .Values.exporter.port }}
+          initialDelaySeconds: 3
+          timeoutSeconds: 3
+        {{ if ne .Values.environment "ci" }}
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            memory: 100Mi
+        {{ end }}
+      {{- end }}

@@ -11,3 +11,10 @@ domain: testnet.w3f.tech
 frontendPort: 3000
 backendPort: 1024
 feedPort: 8080
+
+exporter:
+  enabled: true
+  port: 3000
+  image:
+    repo: web3f/substrate-telemetry-exporter
+    tag: v0.1.0

@@ -11,5 +11,9 @@ spec:
     port: {{ .Values.backendPort }}
   - name: feed
     port: {{ .Values.feedPort }}
+  {{- if .Values.exporter.enabled }}
+  - name: metrics
+    port: {{ .Values.exporter.port }}
+  {{- end }}
   selector:
     app: {{ include "substrate-telemetry.backendAppName" . }}
