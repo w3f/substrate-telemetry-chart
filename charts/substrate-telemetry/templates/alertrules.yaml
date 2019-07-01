@@ -23,7 +23,7 @@ spec:
       for: 1m
       labels:
         severity: critical
-    - alert: BlockFinalizationStlowDown
+    - alert: BlockFinalizationSlowDown
       annotations:
         message: 'Blocks were finalized in 80% of the production rate in the last minute'
       expr: rate(polkadot_best_block[10m]) / rate(polkadot_best_finalized[1m]) >= 0.8
