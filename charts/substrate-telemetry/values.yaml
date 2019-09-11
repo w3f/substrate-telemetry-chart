@@ -21,3 +21,5 @@ exporter:
 
 alertrules:
   enabled: true
+
+whiteListSourceRange: "0.0.0.0/0"
