@@ -18,9 +18,9 @@ spec:
         severity: warning
     - alert: BlockProductionStopped
       annotations:
-        message: 'Blocks were not produced in the last minute'
+        message: 'Blocks were not produced in the last two minutes'
       expr: increase(polkadot_best_block[1m]) == 0
-      for: 1m
+      for: 2m
       labels:
         severity: critical
     - alert: BlockFinalizationSlowDown
@@ -32,9 +32,9 @@ spec:
         severity: warning
     - alert: BlockFinalizationStopped
       annotations:
-        message: 'Blocks were not finalized in the last minute'
+        message: 'Blocks were not finalized in the last two minutes'
       expr: increase(polkadot_best_finalized[1m]) == 0
-      for: 1m
+      for: 2m
       labels:
         severity: critical
 {{ end }}
