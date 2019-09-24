@@ -32,7 +32,7 @@ spec:
         severity: warning
     - alert: BlockProductionStallLong
       annotations:
-        message: 'Blocks were not produced for 1 minute'
+        message: 'Blocks were not produced for 2 minutes'
       expr: increase(polkadot_best_block[1m]) == 0
       for: 2m
       labels:
@@ -53,14 +53,14 @@ spec:
         severity: critical
     - alert: BlockFinalizationStallShort
       annotations:
-        message: 'Blocks were not produced for 1 minute'
+        message: 'Blocks were not finalized for 1 minute'
       expr: increase(polkadot_best_finalized[1m]) == 0
       for: 1m
       labels:
         severity: warning
     - alert: BlockFinalizationStallShort
       annotations:
-        message: 'Blocks were not produced for 2 minutes'
+        message: 'Blocks were not finalized for 2 minutes'
       expr: increase(polkadot_best_finalized[1m]) == 0
       for: 2m
       labels:
