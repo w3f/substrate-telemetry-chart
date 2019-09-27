@@ -65,4 +65,11 @@ spec:
       for: 2m
       labels:
         severity: critical
+    - alert: NewForkDetected
+      annotations:
+        message: 'New fork detected, please check logs'
+      expr: increase(polkadot_forks_total[1m]) > 0
+      for: 1m
+      labels:
+        severity: warning
 {{ end }}
