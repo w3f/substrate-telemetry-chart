@@ -58,7 +58,7 @@ spec:
       for: 1m
       labels:
         severity: warning
-    - alert: BlockFinalizationStallShort
+    - alert: BlockFinalizationStallLong
       annotations:
         message: 'Blocks were not finalized for 2 minutes'
       expr: increase(polkadot_best_finalized[1m]) == 0
