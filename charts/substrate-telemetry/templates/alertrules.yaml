@@ -18,9 +18,9 @@ spec:
         severity: warning
     - alert: BlockProductionSlowDownLong
       annotations:
-        message: 'Blocks were produced at 3x the previous rate for 3 minutes'
+        message: 'Blocks were produced at 3x the previous rate for 15 minutes'
       expr: rate(polkadot_best_block[10m]) / rate(polkadot_best_block[1m]) >= 3
-      for: 3m
+      for: 15m
       labels:
         severity: critical
     - alert: BlockProductionStallShort
@@ -32,9 +32,9 @@ spec:
         severity: warning
     - alert: BlockProductionStallLong
       annotations:
-        message: 'Blocks were not produced for 2 minutes'
+        message: 'Blocks were not produced for 15 minutes'
       expr: increase(polkadot_best_block[1m]) == 0
-      for: 2m
+      for: 15m
       labels:
         severity: critical
     - alert: BlockFinalizationSlowDownShort
@@ -46,9 +46,9 @@ spec:
         severity: warning
     - alert: BlockFinalizationSlowDownLong
       annotations:
-        message: 'Blocks were finalized at 3x the previous rate for 3 minutes'
+        message: 'Blocks were finalized at 3x the previous rate for 15 minutes'
       expr: rate(polkadot_best_finalized[10m]) / rate(polkadot_best_finalized[1m]) >= 3
-      for: 3m
+      for: 15m
       labels:
         severity: critical
     - alert: BlockFinalizationStallShort
@@ -60,9 +60,9 @@ spec:
         severity: warning
     - alert: BlockFinalizationStallLong
       annotations:
-        message: 'Blocks were not finalized for 2 minutes'
+        message: 'Blocks were not finalized for 15 minutes'
       expr: increase(polkadot_best_finalized[1m]) == 0
-      for: 2m
+      for: 15m
       labels:
         severity: critical
     - alert: NewForkDetected
