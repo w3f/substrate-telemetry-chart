@@ -23,7 +23,7 @@ main(){
     /scripts/build-helm.sh \
         --set environment=ci \
         --set image.tag="${CIRCLE_SHA1}" \
-        --set alertrules.enabled=false \
+        --set alertrules.general.enabled=false \
         substrate-telemetry \
         ./charts/substrate-telemetry
 
