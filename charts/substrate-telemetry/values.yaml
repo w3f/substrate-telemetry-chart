@@ -20,6 +20,7 @@ exporter:
     tag: v0.3.0
 
 alertrules:
-  enabled: true
+  general:
+    enabled: true
 
 whiteListSourceRange: "0.0.0.0/0"
