@@ -17,7 +17,7 @@ exporter:
   port: 3000
   image:
     repo: web3f/substrate-telemetry-exporter
-    tag: v0.3.0
+    tag: v0.4.0
 
 alertrules:
   general:
