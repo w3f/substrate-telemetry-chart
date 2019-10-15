@@ -5,6 +5,6 @@ metadata:
   name: {{ include "substrate-telemetry.exporterName" . }}
   namespace: default
 data:
-  main.yaml:
+  main.yaml: |-
 {{ toYaml .Values.exporter.config | indent 4 }}
 {{ end }}
