@@ -64,4 +64,11 @@ spec:
           requests:
             memory: 100Mi
         {{ end }}
+        volumeMounts:
+        - name: exporter-config
+          mountPath: /app/config
+      volumes:
+      - name: exporter-config
+        configMap:
+          name: {{ include "substrate-telemetry.exporterName" . }}
       {{- end }}
