@@ -1,0 +1,10 @@
+{{- if .Values.exporter.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: substrate-telemetry-exporter
+  namespace: default
+data:
+  main.yaml:
+{{ toYaml .Values.exporter.config | indent 4 }}
+{{ end }}
