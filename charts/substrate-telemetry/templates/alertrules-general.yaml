@@ -1,4 +1,4 @@
-{{ if .Values.alertrules.general.enabled }}
+{{ if and (ne .Values.environment "ci") (.Values.alertrules.general.enabled) }}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
