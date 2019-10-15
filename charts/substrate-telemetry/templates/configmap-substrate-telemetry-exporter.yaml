@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: substrate-telemetry-exporter
+  name: {{ include "substrate-telemetry.exporterName" . }}
   namespace: default
 data:
   main.yaml:
