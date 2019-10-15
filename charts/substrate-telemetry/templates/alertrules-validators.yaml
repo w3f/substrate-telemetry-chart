@@ -1,0 +1,40 @@
+{{ if and (ne .Values.environment "ci") (.Values.alertrules.validators.enabled) }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app: polkadot
+  name: polkadot-validators
+spec:
+  groups:
+  - name: polkadot-validators.rules
+    rules:
+    - alert: ValidatorPrevotingStallShort
+      annotations:
+        message: 'Prevotes were not received for 1 minute from {{ voter }}'
+      expr: increase(polkadot_validator_prevote_received_total[1m]) == 0
+      for: 1m
+      labels:
+        severity: warning
+    - alert: ValidatorPrevotingStallLong
+      annotations:
+        message: 'Prevotes were not received for 5 minutes from {{ voter }}'
+      expr: increase(polkadot_validator_prevote_received_total[5m]) == 0
+      for: 5m
+      labels:
+        severity: critical
+    - alert: ValidatorPrecommitingStallShort
+      annotations:
+        message: 'Precommits were not received for 1 minute from {{ voter }}'
+      expr: increase(polkadot_validator_precommit_received_total[1m]) == 0
+      for: 1m
+      labels:
+        severity: warning
+    - alert: ValidatorPrecommitingStallLong
+      annotations:
+        message: 'Precommits were not received for 5 minutes from {{ voter }}'
+      expr: increase(polkadot_validator_precommit_received_total[5m]) == 0
+      for: 5m
+      labels:
+        severity: critical
+{{ end }}
