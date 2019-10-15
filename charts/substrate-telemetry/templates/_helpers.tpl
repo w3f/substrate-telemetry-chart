@@ -33,7 +33,7 @@ substrate-telemetry-frontend
 substrate-telemetry-backend
 {{- end }}
 
-{{/* Returns the exporter container name */}}
+{{/* Returns the generic exporter name */}}
 {{- define "substrate-telemetry.exporterName" -}}
 substrate-telemetry-exporter
 {{- end }}
