@@ -26,8 +26,7 @@ jobs:
       - image: web3f/ci-commons:v1.6.0
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - run:
           description: run integration tests
           command: |
