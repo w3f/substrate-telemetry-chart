@@ -21,7 +21,7 @@ exporter:
   config:
     subscribe:
       chains:
-      - kusama cc3
+      - kusama cc2
       validators: []
 
 alertrules:
