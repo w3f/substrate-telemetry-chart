@@ -37,4 +37,18 @@ spec:
       for: 5m
       labels:
         severity: critical
+    - alert: ProducerStallShort
+      annotations:
+        message: 'Blocks were not produced for 10 minutes from {{`{{ $labels.producer }}`}}'
+      expr: increase(polkadot_block_produced_total[10m]) == 0
+      for: 1m
+      labels:
+        severity: warning
+    - alert: ProducerStallLong
+      annotations:
+        message: 'Blocks were not produced for 20 minutes from {{`{{ $labels.producer }}`}}'
+      expr: increase(polkadot_block_produced_total[20m]) == 0
+      for: 1m
+      labels:
+        severity: critical
 {{ end }}
