@@ -17,12 +17,13 @@ exporter:
   port: 3000
   image:
     repo: web3f/substrate-telemetry-exporter
-    tag: v0.6.0
+    tag: v0.7.0
   config:
     subscribe:
       chains:
       - kusama cc2
       validators: []
+      producers: []
 
 alertrules:
   general:
