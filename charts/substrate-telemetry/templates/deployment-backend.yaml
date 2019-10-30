@@ -17,6 +17,10 @@ spec:
     metadata:
       labels:
         app: {{ include "substrate-telemetry.backendAppName" . }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-substrate-telemetry-exporter.yaml") . | sha256sum }}
+        checksum/alert-validator: {{ include (print $.Template.BasePath "/alertrules-validators.yaml") . | sha256sum }}
+        checksum/alert-general: {{ include (print $.Template.BasePath "/alertrules-general.yaml") . | sha256sum }}
     spec:
       containers:
       - name: {{ include "substrate-telemetry.backendAppName" . }}
