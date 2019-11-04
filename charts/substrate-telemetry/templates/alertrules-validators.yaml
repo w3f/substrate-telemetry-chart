@@ -11,8 +11,8 @@ spec:
     rules:
     - alert: ValidatorPrevotingStallShort
       annotations:
-        message: 'Prevotes were not received for 1 minute from {{`{{ $labels.voter }}`}}'
-      expr: increase(polkadot_validator_prevote_received_total[1m]) == 0
+        message: 'Prevotes were not received for 2 minute from {{`{{ $labels.voter }}`}}'
+      expr: increase(polkadot_validator_prevote_received_total[2m]) == 0
       for: 1m
       labels:
         severity: warning
@@ -25,8 +25,8 @@ spec:
         severity: critical
     - alert: ValidatorPrecommitingStallShort
       annotations:
-        message: 'Precommits were not received for 1 minute from {{`{{ $labels.voter }}`}}'
-      expr: increase(polkadot_validator_precommit_received_total[1m]) == 0
+        message: 'Precommits were not received for 2 minute from {{`{{ $labels.voter }}`}}'
+      expr: increase(polkadot_validator_precommit_received_total[2m]) == 0
       for: 1m
       labels:
         severity: warning
