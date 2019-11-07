@@ -11,7 +11,7 @@ spec:
     rules:
     - alert: ValidatorPrevotingStallShort
       annotations:
-        message: 'Prevotes were not received for 3 minute from {{`{{ $labels.voter }}`}}'
+        message: 'Prevotes were not received for 3 minutes from {{`{{ $labels.voter }}`}}'
       expr: increase(polkadot_validator_prevote_received_total[3m]) == 0
       for: 1m
       labels:
@@ -25,7 +25,7 @@ spec:
         severity: critical
     - alert: ValidatorPrecommitingStallShort
       annotations:
-        message: 'Precommits were not received for 3 minute from {{`{{ $labels.voter }}`}}'
+        message: 'Precommits were not received for 3 minutes from {{`{{ $labels.voter }}`}}'
       expr: increase(polkadot_validator_precommit_received_total[3m]) == 0
       for: 1m
       labels:
@@ -39,15 +39,15 @@ spec:
         severity: critical
     - alert: ProducerStallShort
       annotations:
-        message: 'Blocks were not produced for 35 minutes by {{`{{ $labels.producer }}`}}'
-      expr: increase(polkadot_block_produced_total[25m]) == 0
+        message: 'Blocks were not produced for 20 minutes by {{`{{ $labels.producer }}`}}'
+      expr: increase(polkadot_block_produced_total[10m]) == 0
       for: 10m
       labels:
         severity: warning
     - alert: ProducerStallLong
       annotations:
-        message: 'Blocks were not produced for 40 minutes by {{`{{ $labels.producer }}`}}'
-      expr: increase(polkadot_block_produced_total[30m]) == 0
+        message: 'Blocks were not produced for 30 minutes by {{`{{ $labels.producer }}`}}'
+      expr: increase(polkadot_block_produced_total[20m]) == 0
       for: 10m
       labels:
         severity: critical
