@@ -11,28 +11,28 @@ spec:
     rules:
     - alert: ValidatorPrevotingStallShort
       annotations:
-        message: 'Prevotes were not received for 3 minutes from {{`{{ $labels.voter }}`}}'
+        message: 'Prevotes were not received for 3 minutes from {{`{{ $labels.name }}`}}'
       expr: increase(polkadot_validator_prevote_received_total[3m]) == 0
       for: 1m
       labels:
         severity: warning
     - alert: ValidatorPrevotingStallLong
       annotations:
-        message: 'Prevotes were not received for 5 minutes from {{`{{ $labels.voter }}`}}'
+        message: 'Prevotes were not received for 5 minutes from {{`{{ $labels.name }}`}}'
       expr: increase(polkadot_validator_prevote_received_total[5m]) == 0
       for: 5m
       labels:
         severity: critical
     - alert: ValidatorPrecommitingStallShort
       annotations:
-        message: 'Precommits were not received for 3 minutes from {{`{{ $labels.voter }}`}}'
+        message: 'Precommits were not received for 3 minutes from {{`{{ $labels.name }}`}}'
       expr: increase(polkadot_validator_precommit_received_total[3m]) == 0
       for: 1m
       labels:
         severity: warning
     - alert: ValidatorPrecommitingStallLong
       annotations:
-        message: 'Precommits were not received for 5 minutes from {{`{{ $labels.voter }}`}}'
+        message: 'Precommits were not received for 5 minutes from {{`{{ $labels.name }}`}}'
       expr: increase(polkadot_validator_precommit_received_total[5m]) == 0
       for: 5m
       labels:
