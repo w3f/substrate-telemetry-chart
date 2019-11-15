@@ -32,3 +32,12 @@ alertrules:
     enabled: false
 
 whiteListSourceRange: "0.0.0.0/0"
+
+backend:
+  reources:
+    limits:
+      cpu: 100m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 500Mi
