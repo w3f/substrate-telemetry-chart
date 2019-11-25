@@ -39,7 +39,7 @@ alertrules:
 whiteListSourceRange: "0.0.0.0/0"
 
 backend:
-  reources:
+  resources:
     limits:
       cpu: 100m
       memory: 800Mi
