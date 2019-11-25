@@ -58,10 +58,7 @@ spec:
           timeoutSeconds: 3
         {{ if ne .Values.environment "ci" }}
         resources:
-          limits:
-            memory: 100Mi
-          requests:
-            memory: 100Mi
+{{ toYaml .Values.exporter.resources | indent 10 }}
         {{ end }}
         volumeMounts:
         - name: exporter-config

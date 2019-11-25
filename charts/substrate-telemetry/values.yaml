@@ -13,6 +13,11 @@ backendPort: 1024
 feedPort: 8080
 
 exporter:
+  resources:
+    limits:
+      memory: 400Mi
+    requests:
+      memory: 400Mi
   enabled: true
   port: 3000
   image:
@@ -37,7 +42,7 @@ backend:
   reources:
     limits:
       cpu: 100m
-      memory: 500Mi
+      memory: 800Mi
     requests:
       cpu: 100m
-      memory: 500Mi
+      memory: 800Mi
