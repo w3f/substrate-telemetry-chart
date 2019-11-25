@@ -11,7 +11,8 @@ RUN apk update && apk add --no-cache \
 
 RUN export PYTHONPATH=${PYTHONPATH}:/usr/lib/python2.7
 
-RUN git clone https://github.com/paritytech/substrate-telemetry.git .
+RUN git clone https://github.com/paritytech/substrate-telemetry.git . && \
+  git checkout 31784131d607c6b009e2d7abcf1ed94b04830916
 
 RUN yarn && \
   yarn build:all
