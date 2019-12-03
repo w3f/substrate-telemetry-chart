@@ -39,15 +39,15 @@ spec:
         severity: critical
     - alert: ProducerStallShort
       annotations:
-        message: 'Blocks were not produced for 20 minutes by {{`{{ $labels.producer }}`}}'
-      expr: increase(polkadot_block_produced_total[10m]) == 0
+        message: 'Blocks were not produced for 30 minutes by {{`{{ $labels.producer }}`}}'
+      expr: increase(polkadot_block_produced_total[20m]) == 0
       for: 10m
       labels:
         severity: warning
     - alert: ProducerStallLong
       annotations:
-        message: 'Blocks were not produced for 30 minutes by {{`{{ $labels.producer }}`}}'
-      expr: increase(polkadot_block_produced_total[20m]) == 0
+        message: 'Blocks were not produced for 45 minutes by {{`{{ $labels.producer }}`}}'
+      expr: increase(polkadot_block_produced_total[35m]) == 0
       for: 10m
       labels:
         severity: critical
