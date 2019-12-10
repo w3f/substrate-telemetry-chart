@@ -1,23 +1,22 @@
-FROM node:10.16-alpine
+FROM rust:1.39.0-slim-stretch AS builder
 
 WORKDIR /app
 
-RUN apk update && apk add --no-cache \
-  python \
-  g++ \
-  make \
-  openssh \
-  git
+COPY . .
 
-RUN export PYTHONPATH=${PYTHONPATH}:/usr/lib/python2.7
+RUN apt update && \
+  apt install -y --no-install-recommends git pkg-config libssl-dev && \
+  git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
+  cd substrate-telemetry && \
+  git checkout 0a89382127b9fb1b95d144cae816c46582975e93 && \
+  cd backend && \
+  cargo build --release
 
-RUN git clone https://github.com/paritytech/substrate-telemetry.git . && \
-  git checkout 31784131d607c6b009e2d7abcf1ed94b04830916
+FROM slim-stretch
 
-RUN yarn && \
-  yarn build:all
+COPY --from=builder /app/target/release /telemetry /usr/local/bin
 
 EXPOSE 1024
 EXPOSE 8080
 
-CMD ["yarn", "start:backend"]
+CMD ["/usr/local/bin/telemetry"]
