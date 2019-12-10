@@ -14,7 +14,7 @@ RUN apt update && \
 
 FROM debian:stretch-slim
 
-COPY --from=builder /app/substrate-telemetry/target/release/telemetry /usr/local/bin
+COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry /usr/local/bin
 
 EXPOSE 1024
 EXPOSE 8080
