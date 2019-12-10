@@ -12,7 +12,7 @@ RUN apt update && \
   cd backend && \
   cargo build --release
 
-FROM slim-stretch
+FROM debian:stretch-slim
 
 COPY --from=builder /app/target/release /telemetry /usr/local/bin
 
