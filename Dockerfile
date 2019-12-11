@@ -20,6 +20,10 @@ COPY . .
 
 COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry /usr/local/bin
 
+RUN git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
+  cd substrate-telemetry && \
+  git checkout 0a89382127b9fb1b95d144cae816c46582975e93
+
 EXPOSE 1024
 EXPOSE 8080
 
