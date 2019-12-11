@@ -9,7 +9,7 @@ environment: production
 domain: testnet.w3f.tech
 
 frontendPort: 3000
-backendPort: 1024
+backendPort: 8000
 feedPort: 8080
 
 exporter:
