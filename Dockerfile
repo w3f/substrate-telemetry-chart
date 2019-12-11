@@ -12,7 +12,11 @@ RUN apt update && \
   cd backend && \
   cargo build --release
 
-FROM debian:stretch-slim
+FROM node:10.17.0-stretch-slim
+
+WORKDIR /app
+
+COPY . .
 
 COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry /usr/local/bin
 
