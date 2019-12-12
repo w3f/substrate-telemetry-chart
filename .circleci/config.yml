@@ -53,6 +53,8 @@ workflows:
           filters:
             tags:
               only: /.*/
+          requires:
+            - buildImage
       - publishChart:
           filters:
             branches:
@@ -60,7 +62,6 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
           requires:
-            - buildImage
             - integrationTests
       - publishImage:
           filters:
@@ -69,5 +70,4 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
           requires:
-            - buildImage
             - integrationTests
