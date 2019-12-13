@@ -12,7 +12,7 @@ RUN apt update && \
   cd backend && \
   cargo build --release
 
-FROM node:10.17.0-stretch-slim
+FROM nikolaik/python-nodejs:python3.7-nodejs13-stretch
 
 WORKDIR /app
 
