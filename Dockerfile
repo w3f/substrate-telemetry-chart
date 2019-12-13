@@ -12,7 +12,7 @@ RUN apt update && \
   cd backend && \
   cargo build --release
 
-FROM node:10.17.0-stretch-slim
+FROM nikolaik/python-nodejs:python3.7-nodejs13-stretch
 
 WORKDIR /app
 
@@ -25,7 +25,9 @@ RUN apt update && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
   git checkout 0a89382127b9fb1b95d144cae816c46582975e93 && \
-  yarn
+  yarn && \
+  cd packages/frontend && \
+  npm i
 
 EXPOSE 1024
 EXPOSE 8080
