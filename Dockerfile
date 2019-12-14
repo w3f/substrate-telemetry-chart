@@ -25,9 +25,7 @@ RUN apt update && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
   git checkout 0a89382127b9fb1b95d144cae816c46582975e93 && \
-  yarn && \
-  cd packages/frontend && \
-  npm i
+  yarn build:all
 
 EXPOSE 1024
 EXPOSE 8080
