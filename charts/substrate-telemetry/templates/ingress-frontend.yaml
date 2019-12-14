@@ -25,4 +25,4 @@ spec:
       - path: /feed/
         backend:
           serviceName: {{ include "substrate-telemetry.backendSvcName" . }}
-          servicePort: {{ .Values.feedPort }}
+          servicePort: {{ .Values.backendPort }}
