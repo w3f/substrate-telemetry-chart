@@ -9,8 +9,6 @@ spec:
   ports:
   - name: backend
     port: {{ .Values.backendPort }}
-  - name: feed
-    port: {{ .Values.feedPort }}
   {{- if .Values.exporter.enabled }}
   - name: metrics
     port: {{ .Values.exporter.port }}
