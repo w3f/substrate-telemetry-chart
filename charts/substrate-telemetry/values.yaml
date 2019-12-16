@@ -25,7 +25,7 @@ exporter:
   config:
     subscribe:
       chains:
-      - kusama cc3
+      - Kusama CC3
       validators: []
       producers: []
 
