@@ -12,6 +12,7 @@ spec:
     - alert: BlockProductionSlowDownShort
       annotations:
         message: 'Blocks were produced at 3x the previous rate for 2 minutes'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Production-Slow-Down"
       expr: rate(polkadot_best_block[10m]) / rate(polkadot_best_block[1m]) >= 3
       for: 2m
       labels:
@@ -19,6 +20,7 @@ spec:
     - alert: BlockProductionSlowDownLong
       annotations:
         message: 'Blocks were produced at 3x the previous rate for 15 minutes'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Production-Slow-Down"
       expr: rate(polkadot_best_block[10m]) / rate(polkadot_best_block[1m]) >= 3
       for: 15m
       labels:
@@ -26,6 +28,7 @@ spec:
     - alert: BlockProductionStallShort
       annotations:
         message: 'Blocks were not produced for 1 minute'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Production-Stall"
       expr: increase(polkadot_best_block[1m]) == 0
       for: 1m
       labels:
@@ -33,6 +36,7 @@ spec:
     - alert: BlockProductionStallLong
       annotations:
         message: 'Blocks were not produced for 15 minutes'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Production-Stall"
       expr: increase(polkadot_best_block[1m]) == 0
       for: 15m
       labels:
@@ -40,6 +44,7 @@ spec:
     - alert: BlockFinalizationSlowDownShort
       annotations:
         message: 'Blocks were finalized at 3x the previous rate for 2 minutes'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Finalization-Slow-Down"
       expr: rate(polkadot_best_finalized[10m]) / rate(polkadot_best_finalized[1m]) >= 3
       for: 2m
       labels:
@@ -47,6 +52,7 @@ spec:
     - alert: BlockFinalizationSlowDownLong
       annotations:
         message: 'Blocks were finalized at 3x the previous rate for 15 minutes'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Finalization-Slow-Down"
       expr: rate(polkadot_best_finalized[10m]) / rate(polkadot_best_finalized[1m]) >= 3
       for: 15m
       labels:
@@ -54,6 +60,7 @@ spec:
     - alert: BlockFinalizationStallShort
       annotations:
         message: 'Blocks were not finalized for 1 minute'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Finalization-Stall"
       expr: increase(polkadot_best_finalized[1m]) == 0
       for: 1m
       labels:
@@ -61,6 +68,7 @@ spec:
     - alert: BlockFinalizationStallLong
       annotations:
         message: 'Blocks were not finalized for 15 minutes'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Block-Finalization-Stall"
       expr: increase(polkadot_best_finalized[1m]) == 0
       for: 15m
       labels:
@@ -68,6 +76,7 @@ spec:
     - alert: NewForkDetected
       annotations:
         message: 'New fork detected, please check logs'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/New-Fork-Detected"
       expr: increase(polkadot_forks_total[1m]) > 0
       for: 1m
       labels:

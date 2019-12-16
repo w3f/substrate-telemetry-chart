@@ -12,6 +12,7 @@ spec:
     - alert: ValidatorPrevotingStallShort
       annotations:
         message: 'Prevotes were not received for 3 minutes from {{`{{ $labels.name }}`}}'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Validator-Prevoting-Stall"
       expr: increase(polkadot_validator_prevote_received_total[3m]) == 0
       for: 1m
       labels:
@@ -19,6 +20,7 @@ spec:
     - alert: ValidatorPrevotingStallLong
       annotations:
         message: 'Prevotes were not received for 5 minutes from {{`{{ $labels.name }}`}}'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Validator-Prevoting-Stall"
       expr: increase(polkadot_validator_prevote_received_total[5m]) == 0
       for: 5m
       labels:
@@ -26,6 +28,7 @@ spec:
     - alert: ValidatorPrecommitingStallShort
       annotations:
         message: 'Precommits were not received for 3 minutes from {{`{{ $labels.name }}`}}'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Validator-Precommiting-Stall"
       expr: increase(polkadot_validator_precommit_received_total[3m]) == 0
       for: 1m
       labels:
@@ -33,6 +36,7 @@ spec:
     - alert: ValidatorPrecommitingStallLong
       annotations:
         message: 'Precommits were not received for 5 minutes from {{`{{ $labels.name }}`}}'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Validator-Precommiting-Stall"
       expr: increase(polkadot_validator_precommit_received_total[5m]) == 0
       for: 5m
       labels:
@@ -40,6 +44,7 @@ spec:
     - alert: ProducerStallShort
       annotations:
         message: 'Blocks were not produced for 1 hour by {{`{{ $labels.producer }}`}}'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Producer-Stall"
       expr: increase(polkadot_block_produced_total[50m]) == 0
       for: 10m
       labels:
@@ -47,6 +52,7 @@ spec:
     - alert: ProducerStallLong
       annotations:
         message: 'Blocks were not produced for 1:30 hours by {{`{{ $labels.producer }}`}}'
+        runbook_url: "https://github.com/w3f/infrastructure/wiki/Producer-Stall"
       expr: increase(polkadot_block_produced_total[80m]) == 0
       for: 10m
       labels:
