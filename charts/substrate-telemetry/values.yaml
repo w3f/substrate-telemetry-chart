@@ -21,7 +21,7 @@ exporter:
   port: 3000
   image:
     repo: web3f/substrate-telemetry-exporter
-    tag: v1.0.1
+    tag: v1.0.2
   config:
     subscribe:
       chains:
