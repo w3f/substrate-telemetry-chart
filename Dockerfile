@@ -8,7 +8,7 @@ RUN apt update && \
   apt install -y --no-install-recommends git pkg-config libssl-dev && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
-  git checkout 0a89382127b9fb1b95d144cae816c46582975e93 && \
+  git checkout b9d658e2e6281a4dcc85ff18394203c6e77c83f0 && \
   cd backend && \
   cargo build --release
 
