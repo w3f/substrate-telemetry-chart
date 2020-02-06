@@ -4,7 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: polkadot
-  name: polkadot
+  name: {{ .Release.Name }}-polkadot
 spec:
   groups:
   - name: polkadot.rules

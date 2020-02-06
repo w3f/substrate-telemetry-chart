@@ -10,30 +10,30 @@ telemetry.{{ .Values.domain }}
 
 {{/* Returns the TLS secret name to be used in certs and ingress */}}
 {{- define "substrate-telemetry.tlsSecretName" -}}
-substrate-telemetry-tls
+{{ .Release.Name }}-tls
 {{- end }}
 
 {{/* Returns the frontend service name */}}
 {{- define "substrate-telemetry.frontendSvcName" -}}
-substrate-telemetry-frontend
+{{ .Release.Name }}-frontend
 {{- end }}
 
 {{/* Returns the backend service name */}}
 {{- define "substrate-telemetry.backendSvcName" -}}
-substrate-telemetry-backend
+{{ .Release.Name }}-backend
 {{- end }}
 
 {{/* Returns the frontend app name */}}
 {{- define "substrate-telemetry.frontendAppName" -}}
-substrate-telemetry-frontend
+{{ .Release.Name }}-frontend
 {{- end }}
 
 {{/* Returns the backend app name */}}
 {{- define "substrate-telemetry.backendAppName" -}}
-substrate-telemetry-backend
+{{ .Release.Name }}-backend
 {{- end }}
 
 {{/* Returns the generic exporter name */}}
 {{- define "substrate-telemetry.exporterName" -}}
-substrate-telemetry-exporter
+{{ .Release.Name }}-exporter
 {{- end }}
