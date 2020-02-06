@@ -4,7 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: polkadot
-  name: polkadot-validators
+  name: {{ .Release.Name }}-polkadot-validators
 spec:
   groups:
   - name: polkadot-validators.rules
