@@ -11,11 +11,4 @@ spec:
   dnsNames:
   - {{ include "substrate-telemetry.frontendDomain" . }}
   - {{ include "substrate-telemetry.backendDomain" . }}
-  acme:
-    config:
-    - dns01:
-        provider: prod-dns
-      domains:
-        - {{ include "substrate-telemetry.frontendDomain" . }}
-        - {{ include "substrate-telemetry.backendDomain" . }}
 {{- end }}
