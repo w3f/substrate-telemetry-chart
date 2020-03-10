@@ -3,17 +3,25 @@ version: 2
 jobs:
   buildImage:
     docker:
-      - image: web3f/ci-commons:v1.6.0
+      - image: web3f/ci-commons:v2.0.1
     steps:
       - checkout
       - setup_remote_docker
       - run:
           command: |
             /scripts/build-image.sh web3f/substrate-telemetry .
+  helmLint:
+    docker:
+      - image: web3f/ci-commons:v2.0.1
+    steps:
+      - checkout
+      - run:
+          command: |
+            helm lint ./charts/substrate-telemetry
 
   publishImage:
     docker:
-      - image: web3f/ci-commons:v1.6.0
+      - image: web3f/ci-commons:v2.0.1
     steps:
       - checkout
       - setup_remote_docker
@@ -23,7 +31,7 @@ jobs:
 
   integrationTests:
     docker:
-      - image: web3f/ci-commons:v1.6.0
+      - image: web3f/ci-commons:v2.0.1
     steps:
       - checkout
       - setup_remote_docker
@@ -34,7 +42,7 @@ jobs:
 
   publishChart:
     docker:
-      - image: web3f/ci-commons:v1.6.0
+      - image: web3f/ci-commons:v2.0.1
     steps:
       - checkout
       - run:
@@ -49,12 +57,17 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - helmLint:
+          filters:
+            tags:
+              only: /.*/
       - integrationTests:
           filters:
             tags:
               only: /.*/
           requires:
             - buildImage
+            - helmLint
       - publishChart:
           filters:
             branches:
