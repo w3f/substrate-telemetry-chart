@@ -6,6 +6,7 @@ namespace: default
 
 environment: production
 
+endpointSubdomain: telemetry
 domain: testnet.w3f.tech
 
 frontendPort: 3000
