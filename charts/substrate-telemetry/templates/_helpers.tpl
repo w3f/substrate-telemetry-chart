@@ -1,11 +1,11 @@
 {{/* Returns the backend domain */}}
 {{- define "substrate-telemetry.backendDomain" -}}
-telemetry-backend.{{ .Values.domain }}
+{{ .Values.endpointSubdomain }}-backend.{{ .Values.domain }}
 {{- end }}
 
 {{/* Returns the frontend domain */}}
 {{- define "substrate-telemetry.frontendDomain" -}}
-telemetry.{{ .Values.domain }}
+{{ .Values.endpointSubdomain }}.{{ .Values.domain }}
 {{- end }}
 
 {{/* Returns the TLS secret name to be used in certs and ingress */}}
