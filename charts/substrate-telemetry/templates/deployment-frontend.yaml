@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "substrate-telemetry.frontendAppName" . }}
-  namespace: {{ .Values.namespace }}
   labels:
     app: {{ include "substrate-telemetry.frontendAppName" . }}
 spec:

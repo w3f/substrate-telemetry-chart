@@ -2,8 +2,6 @@ image:
   repo: web3f/substrate-telemetry
   tag: latest
 
-namespace: default
-
 environment: production
 
 endpointSubdomain: telemetry
