@@ -27,7 +27,7 @@ RUN apt update && \
   git checkout 0a89382127b9fb1b95d144cae816c46582975e93 && \
   yarn && yarn build:all
 
-EXPOSE 1024
-EXPOSE 8080
+EXPOSE 3000
+EXPOSE 8000
 
 CMD ["/usr/local/bin/telemetry"]
