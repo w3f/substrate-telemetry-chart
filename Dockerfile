@@ -1,4 +1,4 @@
-FROM rust:1.39.0-slim-stretch AS builder
+FROM rust:1.44.1-slim-stretch AS builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN apt update && \
   apt install -y --no-install-recommends git pkg-config libssl-dev && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
-  git checkout b9d658e2e6281a4dcc85ff18394203c6e77c83f0 && \
+  git checkout 26c1c6d61809bab0ba0e21381da5310fbdc9cf34 && \
   cd backend && \
   cargo build --release
 
