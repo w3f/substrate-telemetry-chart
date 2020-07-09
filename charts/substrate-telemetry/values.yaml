@@ -46,3 +46,9 @@ backend:
     requests:
       cpu: 100m
       memory: 800Mi
+
+ingress:
+  enabled: true
+
+frontend:
+  enabled: true
