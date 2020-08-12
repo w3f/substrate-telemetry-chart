@@ -1,3 +1,5 @@
+ARG COMMIT=525f95b92a376f071c12e18a625d0dedaa6ea49d
+
 FROM rust:1.44.1-slim-stretch AS builder
 
 WORKDIR /app
@@ -8,7 +10,7 @@ RUN apt update && \
   apt install -y --no-install-recommends git pkg-config libssl-dev && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
-  git checkout 26c1c6d61809bab0ba0e21381da5310fbdc9cf34 && \
+  git checkout $COMMIT && \
   cd backend && \
   cargo build --release
 
@@ -24,7 +26,7 @@ RUN apt update && \
   apt install -y --no-install-recommends git && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
-  git checkout 0a89382127b9fb1b95d144cae816c46582975e93 && \
+  git checkout $COMMIT && \
   yarn && yarn build:all
 
 EXPOSE 3000
