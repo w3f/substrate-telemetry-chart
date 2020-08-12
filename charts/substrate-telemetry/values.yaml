@@ -52,3 +52,5 @@ ingress:
 
 frontend:
   enabled: true
+
+backendUrl: "ws://substrate-telemetry-backend:8000/feed"

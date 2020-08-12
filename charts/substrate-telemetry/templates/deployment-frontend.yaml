@@ -25,6 +25,9 @@ spec:
         command: ["npm"]
         args:
         - start
+        env:
+        - name: SUBSTRATE_TELEMETRY_URL
+          value: {{ .Values.backendUrl }}
         workingDir: /app/substrate-telemetry/packages/frontend
         ports:
         - name: frontend
