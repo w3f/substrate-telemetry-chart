@@ -3,7 +3,7 @@ version: 2
 jobs:
   buildImage:
     docker:
-      - image: web3f/ci-commons:v2.2.0
+      - image: web3f/ci-commons:v2.4.1
     resource_class: large
     steps:
       - checkout
@@ -13,7 +13,7 @@ jobs:
             /scripts/build-image.sh web3f/substrate-telemetry .
   helmLint:
     docker:
-      - image: web3f/ci-commons:v2.2.0
+      - image: web3f/ci-commons:v2.4.1
     steps:
       - checkout
       - run:
@@ -22,7 +22,7 @@ jobs:
 
   publishImage:
     docker:
-      - image: web3f/ci-commons:v2.2.0
+      - image: web3f/ci-commons:v2.4.1
     steps:
       - checkout
       - setup_remote_docker
@@ -32,7 +32,7 @@ jobs:
 
   integrationTests:
     docker:
-      - image: web3f/ci-commons:v2.2.0
+      - image: web3f/ci-commons:v2.4.1
     steps:
       - checkout
       - setup_remote_docker
@@ -43,7 +43,7 @@ jobs:
 
   publishChart:
     docker:
-      - image: web3f/ci-commons:v2.2.0
+      - image: web3f/ci-commons:v2.4.1
     steps:
       - checkout
       - run:
