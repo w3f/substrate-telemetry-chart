@@ -7,7 +7,7 @@ environment: production
 endpointSubdomain: telemetry
 domain: testnet.w3f.tech
 
-frontendPort: 80
+frontendPort: 3000
 backendPort: 8000
 
 exporter:
