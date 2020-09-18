@@ -25,7 +25,8 @@ spec:
         command:
         - serve
         args:
-        - s
+        - -l
+        - {{ .Values.frontendPort | quote }}
         - build
         workingDir: /app/substrate-telemetry/frontend
         ports:
