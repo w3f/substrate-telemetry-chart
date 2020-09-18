@@ -22,10 +22,11 @@ spec:
       - name: {{ include "substrate-telemetry.frontendAppName" . }}
         image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
         imagePullPolicy: IfNotPresent
-        command: ["npm"]
+        command:
+        - yarn
         args:
         - start
-        workingDir: /app/substrate-telemetry/packages/frontend
+        workingDir: /app/substrate-telemetry/frontend
         ports:
         - name: frontend
           containerPort: {{ .Values.frontendPort }}
