@@ -23,9 +23,11 @@ spec:
         image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
         imagePullPolicy: IfNotPresent
         command:
-        - yarn
+        - serve
         args:
-        - start
+        - -l
+        - {{ .Values.frontendPort | quote }}
+        - build
         workingDir: /app/substrate-telemetry/frontend
         ports:
         - name: frontend
@@ -40,9 +42,9 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 800Mi
+            memory: 200Mi
           requests:
             cpu: 100m
-            memory: 800Mi
+            memory: 200Mi
         {{ end }}
 {{- end }}
