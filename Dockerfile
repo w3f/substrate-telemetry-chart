@@ -28,7 +28,9 @@ RUN apt update && \
   cd substrate-telemetry && \
   git checkout  ${SUBSTRATE_TELEMETRY_TAG} && \
   cd frontend && \
-  yarn
+  yarn && \
+  yarn build && \
+  yarn global add serve
 
 EXPOSE 3000
 EXPOSE 8000
