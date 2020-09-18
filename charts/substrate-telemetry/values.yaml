@@ -1,6 +1,6 @@
 image:
   repo: web3f/substrate-telemetry
-  tag: latest
+  tag: v2.4.0
 
 environment: production
 

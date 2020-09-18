@@ -1,3 +1,5 @@
+ARG SUBSTRATE_TELEMETRY_TAG=15-09-2020
+
 FROM rust:1.44.1-slim-stretch AS builder
 
 WORKDIR /app
@@ -8,7 +10,7 @@ RUN apt update && \
   apt install -y --no-install-recommends git pkg-config libssl-dev && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
-  git checkout 26c1c6d61809bab0ba0e21381da5310fbdc9cf34 && \
+  git checkout ${SUBSTRATE_TELEMETRY_TAG} && \
   cd backend && \
   cargo build --release
 
@@ -24,8 +26,9 @@ RUN apt update && \
   apt install -y --no-install-recommends git && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
-  git checkout 0a89382127b9fb1b95d144cae816c46582975e93 && \
-  yarn && yarn build:all
+  git checkout  ${SUBSTRATE_TELEMETRY_TAG} && \
+  cd frontend && \
+  yarn
 
 EXPOSE 3000
 EXPOSE 8000
