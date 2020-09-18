@@ -30,7 +30,7 @@ RUN apt update && \
   cd frontend && \
   yarn
 
-EXPOSE 3000
+EXPOSE 80
 EXPOSE 8000
 
 CMD ["/usr/local/bin/telemetry"]
