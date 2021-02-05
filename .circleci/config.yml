@@ -2,6 +2,7 @@ version: 2
 
 jobs:
   buildImage:
+    context: dockerhub-bot
     docker:
       - image: web3f/ci-commons:v2.4.4
     resource_class: xlarge
@@ -22,6 +23,7 @@ jobs:
             helm lint ./charts/substrate-telemetry
 
   publishImage:
+    context: dockerhub-bot
     docker:
       - image: web3f/ci-commons:v2.4.4
     steps:
@@ -43,6 +45,7 @@ jobs:
             /scripts/integration-tests.sh
 
   publishChart:
+    context: github-bot
     docker:
       - image: web3f/ci-commons:v2.4.4
     steps:
@@ -75,7 +78,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
           requires:
             - integrationTests
       - publishImage:
@@ -83,6 +86,6 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
           requires:
             - integrationTests
