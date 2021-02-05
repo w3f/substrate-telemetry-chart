@@ -22,6 +22,8 @@ COPY . .
 
 COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry /usr/local/bin
 
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
 RUN apt update && \
   apt install -y --no-install-recommends git && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
