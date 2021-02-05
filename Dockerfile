@@ -1,4 +1,4 @@
-ARG SUBSTRATE_TELEMETRY_TAG=16-12-2020
+ARG SUBSTRATE_TELEMETRY_TAG=20-01-2021
 
 FROM rust:1.44.1-slim-stretch AS builder
 
@@ -21,6 +21,8 @@ WORKDIR /app
 COPY . .
 
 COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry /usr/local/bin
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 
 RUN apt update && \
   apt install -y --no-install-recommends git && \
