@@ -20,6 +20,7 @@ spec:
       - path: /
         pathType: Prefix
         backend:
-          serviceName: {{ include "substrate-telemetry.backendSvcName" . }}
-          servicePort: {{ .Values.backendPort }}
+          service:
+            name: {{ include "substrate-telemetry.backendSvcName" . }}
+            port: {{ .Values.backendPort }}
 {{- end }}
