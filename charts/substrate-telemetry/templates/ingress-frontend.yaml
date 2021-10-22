@@ -21,11 +21,15 @@ spec:
       - path: /
         pathType: Prefix
         backend:
-          serviceName: {{ include "substrate-telemetry.frontendSvcName" . }}
-          servicePort: {{ .Values.frontendPort }}
+          service:
+            name: {{ include "substrate-telemetry.frontendSvcName" . }}
+            port:
+              number: {{ .Values.frontendPort }}
       - path: /feed/
         pathType: Prefix
         backend:
-          serviceName: {{ include "substrate-telemetry.backendSvcName" . }}
-          servicePort: {{ .Values.backendPort }}
+          service:
+            name: {{ include "substrate-telemetry.backendSvcName" . }}
+            port:
+              number: {{ .Values.backendPort }}
 {{- end }}
