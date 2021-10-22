@@ -22,5 +22,6 @@ spec:
         backend:
           service:
             name: {{ include "substrate-telemetry.backendSvcName" . }}
-            port: {{ .Values.backendPort }}
+            port:
+              number: {{ .Values.backendPort }}
 {{- end }}
