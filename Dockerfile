@@ -1,6 +1,6 @@
-ARG SUBSTRATE_TELEMETRY_TAG=20-01-2021
+ARG SUBSTRATE_TELEMETRY_TAG=26-10-2021
 
-FROM rust:1.44.1-slim-stretch AS builder
+FROM rust:1.56-slim-buster AS builder
 
 WORKDIR /app
 
