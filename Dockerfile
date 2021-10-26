@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 RUN apt update && \
-  apt install -y --no-install-recommends git pkg-config libssl-dev && \
+  apt install -y --no-install-recommends git pkg-config libssl-dev make && \
   git clone https://github.com/paritytech/substrate-telemetry.git substrate-telemetry && \
   cd substrate-telemetry && \
   git checkout ${SUBSTRATE_TELEMETRY_TAG} && \
