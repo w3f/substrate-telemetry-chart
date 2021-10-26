@@ -26,10 +26,7 @@ spec:
         image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
         imagePullPolicy: IfNotPresent
         command:
-        - "/usr/local/bin/telemetry"
-        args:
-        - "--listen"
-        - "0.0.0.0:{{ .Values.backendPort }}"
+        - "/usr/local/bin/telemetry-wrapper.sh" # Port hardcoded at 8000
         ports:
         - name: backend
           containerPort: {{ .Values.backendPort }}
