@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Start the first process
-/usr/local/bin/telemetry_core 2>&1 &
+/usr/local/bin/telemetry_core --listen 0.0.0.0:8000 2>&1 &
 P1=$!
 
 sleep 2;
