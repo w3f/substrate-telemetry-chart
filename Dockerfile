@@ -20,7 +20,7 @@ WORKDIR /app
 
 COPY . .
 
-COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry* /usr/local/bin
+COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry* /usr/local/bin/
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 
