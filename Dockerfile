@@ -20,7 +20,7 @@ WORKDIR /app
 
 COPY . .
 
-COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry /usr/local/bin
+COPY --from=builder /app/substrate-telemetry/backend/target/release/telemetry* /usr/local/bin
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 
@@ -37,4 +37,6 @@ RUN apt update && \
 EXPOSE 3000
 EXPOSE 8000
 
-CMD ["/usr/local/bin/telemetry"]
+COPY /scripts/telemetry-wrapper.sh /usr/local/bin
+
+CMD ["/usr/local/bin/telemetry-wrapper.sh"]
