@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "substrate-telemetry.backendAppName" . }}
+  name: {{ include "substrate-telemetry.backendAppName" . }}-shard
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/limit-rps: "10"
@@ -22,7 +22,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ include "substrate-telemetry.backendSvcName" . }}
+            name: {{ include "substrate-telemetry.backendSvcName" . }}-shard
             port:
-              number: {{ .Values.backendPort }}
+              number: {{ .Values.backendPortShard }}
 {{- end }}

@@ -8,7 +8,8 @@ endpointSubdomain: telemetry
 domain: testnet.w3f.tech
 
 frontendPort: 3000
-backendPort: 8000
+backendPortCore: 8001
+backendPortShard: 8000
 
 exporter:
   resources:

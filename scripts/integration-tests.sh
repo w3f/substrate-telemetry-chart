@@ -7,7 +7,8 @@ source /scripts/bootstrap-helm.sh
 run_tests() {
     echo Running tests...
 
-    wait_pod_ready substrate-telemetry-backend default 2/2
+    wait_pod_ready substrate-telemetry-backend-core default
+    wait_pod_ready substrate-telemetry-backend-shard default
     wait_pod_ready substrate-telemetry-frontend
 }
 

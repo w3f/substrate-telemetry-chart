@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "substrate-telemetry.backendAppName" . }}
+  name: {{ include "substrate-telemetry.backendAppName" . }}-core
   labels:
-    app: {{ include "substrate-telemetry.backendAppName" . }}
+    app: {{ include "substrate-telemetry.backendAppName" . }}-core
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -11,28 +11,31 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: {{ include "substrate-telemetry.backendAppName" . }}
+      app: {{ include "substrate-telemetry.backendAppName" . }}-core
   template:
     metadata:
       labels:
-        app: {{ include "substrate-telemetry.backendAppName" . }}
+        app: {{ include "substrate-telemetry.backendAppName" . }}-core
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap-substrate-telemetry-exporter.yaml") . | sha256sum }}
         checksum/alert-validator: {{ include (print $.Template.BasePath "/alertrules-validators.yaml") . | sha256sum }}
         checksum/alert-general: {{ include (print $.Template.BasePath "/alertrules-general.yaml") . | sha256sum }}
     spec:
       containers:
-      - name: {{ include "substrate-telemetry.backendAppName" . }}
+      - name: {{ include "substrate-telemetry.backendAppName" . }}-core
         image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
         imagePullPolicy: IfNotPresent
         command:
-        - "/usr/local/bin/telemetry-wrapper.sh" # Port hardcoded at 8000
+        - "/usr/local/bin/telemetry-core"
+        args:
+        - -l
+        - 0.0.0.0:{{ .Values.backendPortCore }}
         ports:
         - name: backend
-          containerPort: {{ .Values.backendPort }}
+          containerPort: {{ .Values.backendPortCore }}
         readinessProbe:
           tcpSocket:
-            port: {{ .Values.backendPort }}
+            port: {{ .Values.backendPortCore }}
           initialDelaySeconds: 3
           timeoutSeconds: 3
         {{ if ne .Values.environment "ci" }}

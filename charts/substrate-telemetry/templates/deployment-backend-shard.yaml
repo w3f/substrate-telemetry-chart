@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "substrate-telemetry.backendAppName" . }}-shard
+  labels:
+    app: {{ include "substrate-telemetry.backendAppName" . }}-shard
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ include "substrate-telemetry.backendAppName" . }}-shard
+  template:
+    metadata:
+      labels:
+        app: {{ include "substrate-telemetry.backendAppName" . }}-shard
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-substrate-telemetry-exporter.yaml") . | sha256sum }}
+        checksum/alert-validator: {{ include (print $.Template.BasePath "/alertrules-validators.yaml") . | sha256sum }}
+        checksum/alert-general: {{ include (print $.Template.BasePath "/alertrules-general.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: {{ include "substrate-telemetry.backendAppName" . }}-shard
+        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        imagePullPolicy: IfNotPresent
+        command:
+        - "/usr/local/bin/telemetry-shard"
+        args:
+        - -l
+        - 0.0.0.0:{{ .Values.backendPortShard }}
+        - -c
+        - http://{{ include "substrate-telemetry.backendAppName" . }}-core:{{ .Values.backendPortCore }}/shard_submit
+        ports:
+        - name: backend
+          containerPort: {{ .Values.backendPortShard }}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.backendPortShard }}
+          initialDelaySeconds: 3
+          timeoutSeconds: 3
+        {{ if ne .Values.environment "ci" }}
+        resources:
+{{ toYaml .Values.backend.resources | indent 10 }}
+        {{ end }}
+      {{- if .Values.exporter.enabled }}
+      - name: {{ include "substrate-telemetry.exporterName" . }}
+        image: {{ .Values.exporter.image.repo }}:{{ .Values.exporter.image.tag }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: metrics
+          containerPort: {{ .Values.exporter.port }}
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: {{ .Values.exporter.port }}
+          initialDelaySeconds: 3
+          timeoutSeconds: 3
+        {{ if ne .Values.environment "ci" }}
+        resources:
+{{ toYaml .Values.exporter.resources | indent 10 }}
+        {{ end }}
+        volumeMounts:
+        - name: exporter-config
+          mountPath: /app/config
+      volumes:
+      - name: exporter-config
+        configMap:
+          name: {{ include "substrate-telemetry.exporterName" . }}
+      {{- end }}
