@@ -37,6 +37,4 @@ RUN apt update && \
 EXPOSE 3000
 EXPOSE 8000
 
-COPY /scripts/telemetry-wrapper.sh /usr/local/bin
-
 CMD ["/usr/local/bin/telemetry-core"]
