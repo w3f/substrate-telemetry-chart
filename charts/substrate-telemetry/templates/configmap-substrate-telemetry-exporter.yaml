@@ -6,4 +6,5 @@ metadata:
 data:
   main.yaml: |-
 {{ toYaml .Values.exporter.config | indent 4 }}
+    telemetry_host: ws://{{ include "substrate-telemetry.backendAppName" . }}-core:{{ .Values.backendPortCore }}/feed
 {{ end }}

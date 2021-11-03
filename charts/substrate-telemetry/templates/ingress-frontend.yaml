@@ -1,5 +1,5 @@
 {{- if and (.Values.frontend.enabled) (.Values.ingress.enabled) }}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "substrate-telemetry.frontendAppName" . }}
@@ -9,21 +9,39 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     ingress.kubernetes.io/whitelist-source-range: {{ .Values.whiteListSourceRange }}
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/server-snippets: |
+     location /feed {
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_http_version 1.1;
+      proxy_set_header X-Forwarded-Host $http_host;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header Host $host;
+      proxy_set_header Connection "upgrade";
+      proxy_cache_bypass $http_upgrade;
+      }
 spec:
   tls:
   - hosts:
       - {{ include "substrate-telemetry.frontendDomain" . }}
-    secretName: {{ include "substrate-telemetry.tlsSecretName" . }}
+    secretName: {{ include "substrate-telemetry.tlsSecretName" . }}-frontend
   rules:
   - host: {{ include "substrate-telemetry.frontendDomain" . }}
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: {{ include "substrate-telemetry.frontendSvcName" . }}
-          servicePort: {{ .Values.frontendPort }}
-      - path: /feed/
+          service:
+            name: {{ include "substrate-telemetry.frontendSvcName" . }}
+            port:
+              number: {{ .Values.frontendPort }}
+      - path: /feed
+        pathType: Prefix
         backend:
-          serviceName: {{ include "substrate-telemetry.backendSvcName" . }}
-          servicePort: {{ .Values.backendPort }}
+          service:
+            name: {{ include "substrate-telemetry.backendSvcName" . }}-core
+            port:
+              number: {{ .Values.backendPortCore }}
 {{- end }}

@@ -1,14 +1,28 @@
-image:
-  repo: web3f/substrate-telemetry
-  tag: v2.4.3
+backend:
+  image:
+    repo: parity/substrate-telemetry-backend
+    tag: v4.0-7ff9a31
+  resources:
+    limits:
+      cpu: 100m
+      memory: 800Mi
+    requests:
+      cpu: 100m
+      memory: 800Mi
+frontend:
+  enabled: true
+  image:
+    repo: parity/substrate-telemetry-frontend
+    tag: v4.0-7ff9a31
 
 environment: production
 
 endpointSubdomain: telemetry
-domain: testnet.w3f.tech
+domain: w3f.dev
 
-frontendPort: 3000
-backendPort: 8000
+frontendPort: 8000
+backendPortCore: 8001
+backendPortShard: 8000
 
 exporter:
   resources:
@@ -38,17 +52,5 @@ alertrules:
 
 whiteListSourceRange: "0.0.0.0/0"
 
-backend:
-  resources:
-    limits:
-      cpu: 100m
-      memory: 800Mi
-    requests:
-      cpu: 100m
-      memory: 800Mi
-
 ingress:
-  enabled: true
-
-frontend:
   enabled: true

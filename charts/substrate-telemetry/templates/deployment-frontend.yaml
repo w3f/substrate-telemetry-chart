@@ -17,18 +17,18 @@ spec:
     metadata:
       labels:
         app: {{ include "substrate-telemetry.frontendAppName" . }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-substrate-telemetry-frontend.yaml") . | sha256sum }}
     spec:
       containers:
       - name: {{ include "substrate-telemetry.frontendAppName" . }}
-        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        image: {{ .Values.frontend.image.repo }}:{{ .Values.frontend.image.tag }}
         imagePullPolicy: IfNotPresent
         command:
-        - serve
+        - nginx
         args:
-        - -l
-        - {{ .Values.frontendPort | quote }}
-        - build
-        workingDir: /app/substrate-telemetry/frontend
+        - -g
+        - "daemon off;"
         ports:
         - name: frontend
           containerPort: {{ .Values.frontendPort }}
@@ -47,4 +47,12 @@ spec:
             cpu: 100m
             memory: 200Mi
         {{ end }}
+        volumeMounts:
+        - name: frontend-config
+          mountPath: /app/tmp/env-config.js
+          subPath: env-config.js
+      volumes:
+      - name: frontend-config
+        configMap:
+          name: {{ include "substrate-telemetry.frontendAppName" . }}
 {{- end }}
