@@ -22,9 +22,11 @@ spec:
       - name: {{ include "substrate-telemetry.frontendAppName" . }}
         image: {{ .Values.frontend.image.repo }}:{{ .Values.frontend.image.tag }}
         imagePullPolicy: IfNotPresent
-        env:
-        - name: SUBSTRATE_TELEMETRY_URL
-          value: wss://{{ include "substrate-telemetry.frontendDomain" . }}/feed
+        command:
+        - nginx
+        args:
+        - -g
+        - "daemon off;"
         ports:
         - name: frontend
           containerPort: {{ .Values.frontendPort }}
@@ -43,4 +45,12 @@ spec:
             cpu: 100m
             memory: 200Mi
         {{ end }}
+        volumeMounts:
+        - name: frontend-config
+          mountPath: /app/env-config.js
+          subPath: env-config.js
+      volumes:
+      - name: frontend-config
+        configMap:
+          name: {{ include "substrate-telemetry.frontendAppName" . }}
 {{- end }}
