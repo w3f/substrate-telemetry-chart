@@ -47,7 +47,7 @@ spec:
         {{ end }}
         volumeMounts:
         - name: frontend-config
-          mountPath: /app/env-config.js
+          mountPath: /app/tmp/env-config.js
           subPath: env-config.js
       volumes:
       - name: frontend-config
