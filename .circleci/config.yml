@@ -1,17 +1,6 @@
 version: 2
 
 jobs:
-  buildImage:
-    docker:
-      - image: web3f/ci-commons:v2.4.8
-    resource_class: xlarge
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          command: |
-            /scripts/build-image.sh web3f/substrate-telemetry .
   helmLint:
     docker:
       - image: web3f/ci-commons:v2.4.8
@@ -20,17 +9,6 @@ jobs:
       - run:
           command: |
             helm lint ./charts/substrate-telemetry
-
-  publishImage:
-    docker:
-      - image: web3f/ci-commons:v2.4.8
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          command: |
-            /scripts/publish-image.sh web3f/substrate-telemetry
-
   integrationTests:
     docker:
       - image: web3f/ci-commons:v2.4.8
@@ -41,7 +19,6 @@ jobs:
           description: run integration tests
           command: |
             /scripts/integration-tests.sh
-
   publishChart:
     docker:
       - image: web3f/ci-commons:v2.4.8
@@ -55,11 +32,6 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - buildImage:
-          context: dockerhub-bot
-          filters:
-            tags:
-              only: /.*/
       - helmLint:
           filters:
             tags:
@@ -73,15 +45,6 @@ workflows:
             - helmLint
       - publishChart:
           context: github-bot
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
-          requires:
-            - integrationTests
-      - publishImage:
-          context: dockerhub-bot
           filters:
             branches:
               ignore: /.*/

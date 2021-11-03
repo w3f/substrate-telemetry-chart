@@ -23,10 +23,10 @@ spec:
     spec:
       containers:
       - name: {{ include "substrate-telemetry.backendAppName" . }}-shard
-        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        image: {{ .Values.backend.image.repo }}:{{ .Values.backend.image.tag }}
         imagePullPolicy: IfNotPresent
         command:
-        - "/usr/local/bin/telemetry_shard"
+        - telemetry_shard
         args:
         - -l
         - 0.0.0.0:{{ .Values.backendPortShard }}

@@ -1,6 +1,11 @@
-image:
-  repo: web3f/substrate-telemetry
-  tag: v2.5.0
+backend:
+  image:
+    repo: parity/substrate-telemetry-backend
+    tag: v4.0-7ff9a31
+frontend:
+  image:
+    repo: parity/substrate-telemetry-frontend
+    tag: v4.0-7ff9a31
 
 environment: production
 

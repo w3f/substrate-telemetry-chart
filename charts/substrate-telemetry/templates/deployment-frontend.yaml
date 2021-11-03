@@ -20,14 +20,8 @@ spec:
     spec:
       containers:
       - name: {{ include "substrate-telemetry.frontendAppName" . }}
-        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        image: {{ .Values.frontend.image.repo }}:{{ .Values.frontend.image.tag }}
         imagePullPolicy: IfNotPresent
-        command:
-        - serve
-        args:
-        - -l
-        - {{ .Values.frontendPort | quote }}
-        - build
         env:
         - name: SUBSTRATE_TELEMETRY_URL
           value: ws://{{ include "substrate-telemetry.backendAppName" . }}-core:{{ .Values.backendPortCore }}/feed
