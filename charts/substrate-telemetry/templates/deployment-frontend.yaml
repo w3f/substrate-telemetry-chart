@@ -17,6 +17,8 @@ spec:
     metadata:
       labels:
         app: {{ include "substrate-telemetry.frontendAppName" . }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-substrate-telemetry-frontend.yaml") . | sha256sum }}
     spec:
       containers:
       - name: {{ include "substrate-telemetry.frontendAppName" . }}
