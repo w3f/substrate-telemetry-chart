@@ -25,7 +25,6 @@ spec:
         env:
         - name: SUBSTRATE_TELEMETRY_URL
           value: ws://{{ include "substrate-telemetry.backendAppName" . }}-core:{{ .Values.backendPortCore }}/feed
-        workingDir: /app/substrate-telemetry/frontend
         ports:
         - name: frontend
           containerPort: {{ .Values.frontendPort }}
