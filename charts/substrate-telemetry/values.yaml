@@ -20,7 +20,7 @@ environment: production
 endpointSubdomain: telemetry
 domain: testnet.w3f.tech
 
-frontendPort: 3000
+frontendPort: 8000
 backendPortCore: 8001
 backendPortShard: 8000
 
