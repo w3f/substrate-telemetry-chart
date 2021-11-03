@@ -36,4 +36,11 @@ spec:
             name: {{ include "substrate-telemetry.backendSvcName" . }}-shard
             port:
               number: {{ .Values.backendPortShard }}
+      - path: /feed
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "substrate-telemetry.backendSvcName" . }}-core
+            port:
+              number: {{ .Values.backendPortCore }}
 {{- end }}
