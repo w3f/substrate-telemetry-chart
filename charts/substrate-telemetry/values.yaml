@@ -14,6 +14,13 @@ frontend:
   image:
     repo: parity/substrate-telemetry-frontend
     tag: v4.0-7ff9a31
+  resources:
+    limits:
+      cpu: 100m
+      memory: 200Mi
+    requests:
+      cpu: 100m
+      memory: 200Mi
 
 environment: production
 
