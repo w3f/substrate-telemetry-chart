@@ -24,7 +24,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
         - name: SUBSTRATE_TELEMETRY_URL
-          value: ws://{{ include "substrate-telemetry.backendAppName" . }}-core:{{ .Values.backendPortCore }}/feed
+          value: wss://{{ include "substrate-telemetry.frontendDomain" . }}/feed
         ports:
         - name: frontend
           containerPort: {{ .Values.frontendPort }}
