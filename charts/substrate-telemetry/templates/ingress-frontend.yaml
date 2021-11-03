@@ -14,7 +14,7 @@ spec:
   tls:
   - hosts:
       - {{ include "substrate-telemetry.frontendDomain" . }}
-    secretName: {{ include "substrate-telemetry.tlsSecretName" . }}
+    secretName: {{ include "substrate-telemetry.tlsSecretName" . }}-frontend
   rules:
   - host: {{ include "substrate-telemetry.frontendDomain" . }}
     http:

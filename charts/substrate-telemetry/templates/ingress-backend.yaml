@@ -13,7 +13,7 @@ spec:
   tls:
   - hosts:
       - {{ include "substrate-telemetry.backendDomain" . }}
-    secretName: {{ include "substrate-telemetry.tlsSecretName" . }}
+    secretName: {{ include "substrate-telemetry.tlsSecretName" . }}-backend
   rules:
   - host: {{ include "substrate-telemetry.backendDomain" . }}
     http:
