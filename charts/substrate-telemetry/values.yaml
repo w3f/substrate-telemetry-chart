@@ -2,7 +2,15 @@ backend:
   image:
     repo: parity/substrate-telemetry-backend
     tag: v4.0-7ff9a31
+  resources:
+    limits:
+      cpu: 100m
+      memory: 800Mi
+    requests:
+      cpu: 100m
+      memory: 800Mi
 frontend:
+  enabled: true
   image:
     repo: parity/substrate-telemetry-frontend
     tag: v4.0-7ff9a31
@@ -44,17 +52,5 @@ alertrules:
 
 whiteListSourceRange: "0.0.0.0/0"
 
-backend:
-  resources:
-    limits:
-      cpu: 100m
-      memory: 800Mi
-    requests:
-      cpu: 100m
-      memory: 800Mi
-
 ingress:
-  enabled: true
-
-frontend:
   enabled: true
