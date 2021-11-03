@@ -41,7 +41,6 @@ workflows:
             tags:
               only: /.*/
           requires:
-            - buildImage
             - helmLint
       - publishChart:
           context: github-bot
