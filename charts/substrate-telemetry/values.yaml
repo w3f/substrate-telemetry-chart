@@ -48,9 +48,6 @@ exporter:
       - Kusama
       validators: []
 
-certificate:
-  enabled: true
-
 alertrules:
   general:
     enabled: true
