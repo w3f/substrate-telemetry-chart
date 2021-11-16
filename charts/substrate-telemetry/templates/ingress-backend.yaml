@@ -21,6 +21,9 @@ metadata:
       proxy_cache_bypass $http_upgrade;
       }
 spec:
+  {{- if .Values.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  {{- end }}
   tls:
   - hosts:
       - {{ include "substrate-telemetry.backendDomain" . }}
