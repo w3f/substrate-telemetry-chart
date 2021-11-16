@@ -58,3 +58,4 @@ whiteListSourceRange: "0.0.0.0/0"
 
 ingress:
   enabled: true
+  cluster_issuer: letsencrypt
