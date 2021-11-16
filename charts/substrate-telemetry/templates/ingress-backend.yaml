@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/limit-rps: "10"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.cluster_issuer | default "letsencrypt" | quote }}
     nginx.ingress.kubernetes.io/server-snippets: |
      location / {
       proxy_set_header Upgrade $http_upgrade;
@@ -21,6 +21,9 @@ metadata:
       proxy_cache_bypass $http_upgrade;
       }
 spec:
+  {{- if .Values.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  {{- end }}
   tls:
   - hosts:
       - {{ include "substrate-telemetry.backendDomain" . }}
