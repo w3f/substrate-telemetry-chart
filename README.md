@@ -1,4 +1,5 @@
-[![CircleCI](https://circleci.com/gh/w3f/substrate-telemetry-chart.svg?style=svg)](https://circleci.com/gh/w3f/substrate-telemetry-chart)
+# DEPRECATED
+This reporsitory is deprecated, please use https://github.com/paritytech/helm-charts/tree/main/charts/substrate-telemetry instead!
 
 # substrate-telemetry-chart
 
